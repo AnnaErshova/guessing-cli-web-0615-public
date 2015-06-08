@@ -1,33 +1,34 @@
 # the biggest problem with this method is that it does not test whether the number is betwen 1 and 6, 
 # but that seems to be outside the scope of the problem
 
-def run_guessing_game #arguments? I guess we don't need any here
+def run_guessing_game 
+  # arguments? I guess we don't need any here
+  # this will be our runner
   # communicates with the user
   puts "Guess a number between 1 and 6."
-  puts "Or type 'exit' to exit the CLI." #spec specifies 1 to 6 and the text...
-  # assigns a variable to what has been entered
-  human_guess = gets.strip.to_s
-  # theoretically, we should check for whether it is an integer
-  while human_guess != "exit" do
+  # rspec specifies 1 to 6 and the text...
+  puts "Or type 'exit' to exit the CLI." 
+  user_guess = gets.strip.to_s
+  # assigns a variable to user's input
+  # theoretically, we should check for whether it is an integer, but that is outside the scope of the program
+  while user_guess != "exit" do
     # I tried "while human_guess.class == Fixnum do", but that did not work
     # system generates random number between 1 and 6
+    # can we use until? that could work I think
     random_number = rand(1..6).to_s # 
-    # because we don't want 0 
+    # because we don't want 0, so easier to specify a range, than do rand(5)+1 and assign a variable to that
     # .to_s because also includes 'exit'  
     # the problem here is that it does not account for entries between 1 and 6, but I guess that is the user's fault
-    if human_guess != random_number
-      puts "The computer guessed #{random_number}."
-      puts "Try again!"
-      puts "\n"
+    if user_guess != random_number
+      puts "The computer guessed #{random_number}. \rTry again!\n\n"
       run_guessing_game
     else 
-      puts "You guessed the correct number!"
-      puts "\n"
+      puts "You guessed the correct number! \n\n"
       run_guessing_game
     end # ends if statement 
     break
   end # ends while loop
-  puts "Goodbye!" # this happens if the user prompt is 'exit'
+  puts "Goodbye!" # this happens if the user prompt is 'exit', so this is the opposite of the while condition
 end # ends method
 
 # So your run_guessing_game method is going to be responsible for several things: => looks like we only need one method
